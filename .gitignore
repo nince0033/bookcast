@@ -1,0 +1,52 @@
+# --- Secrets ---
+config.env
+*.key
+*.pem
+.secrets/
+
+# --- Generated artifacts (large or per-project) ---
+audio/
+images/
+slices/
+sfx/
+_tmp_assemble/
+*.mp4
+*.mp3
+*.png
+*.jpg
+*.jpeg
+*.wav
+*.srt
+final.mp4
+full_narration.mp3
+_audio_concat.txt
+.pipeline_state.json
+
+# But always keep example artifacts that are small/safe
+!examples/**/script.json
+!examples/**/source.txt
+!examples/**/README.md
+!docs/**/*.png
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Logs / temp ---
+*.log
+*.tmp
+.cache/
