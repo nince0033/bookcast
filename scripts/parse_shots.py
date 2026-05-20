@@ -185,7 +185,7 @@ def main():
         "aspect_ratio": resolve("aspect_ratio", args.aspect, "16:9"),
         "voice_id":     resolve("voice_id", args.voice, "audiobook_male_1"),
         "voice_speed":  resolve("voice_speed", args.speed, 1.0),
-        "voice_emotion": resolve("voice_emotion", args.emotion, "calm"),
+        "voice_emotion": resolve("voice_emotion", args.emotion, ""),
         "image_model":  resolve("image_model", args.image_model, "gpt-image-2"),
         "bgm":          resolve("bgm", args.bgm, "sfx/bgm.mp3"),
         "style_anchor": resolve("style_anchor", args.style, "cinematic, high quality, detailed"),

@@ -52,18 +52,22 @@ def save_state(s):
     STATE.write_text(json.dumps(s, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
-def tts_shot(shot, voice_id, speed=1.0, emotion="calm"):
+def tts_shot(shot, voice_id, speed=1.0, emotion=""):
     out = AUDIO / f"shot_{shot['id']:03d}.mp3"
+    voice_setting = {
+        "voice_id": voice_id,
+        "speed": speed,
+        "vol": 1.0,
+        "pitch": 0,
+    }
+    # Only send emotion if explicitly set. MiniMax's calm/sad/etc. tags slow
+    # the read pace noticeably; omitting them = default natural pace.
+    if emotion:
+        voice_setting["emotion"] = emotion
     payload = {
         "model": "speech-02-hd",
         "text": shot["narration"],
-        "voice_setting": {
-            "voice_id": voice_id,
-            "speed": speed,
-            "vol": 1.0,
-            "pitch": 0,
-            "emotion": emotion,
-        },
+        "voice_setting": voice_setting,
         "audio_setting": {
             "sample_rate": 32000,
             "bitrate": 128000,
@@ -120,7 +124,7 @@ def main():
     shots   = script["shots"]
     voice   = script.get("voice_id", "audiobook_male_1")
     speed   = script.get("voice_speed", 1.0)
-    emotion = script.get("voice_emotion", "calm")
+    emotion = script.get("voice_emotion", "")  # empty = no emotion tag = natural pace
 
     force_shot = None
     force_all  = "--force" in sys.argv
@@ -155,6 +159,12 @@ def main():
 
     total_chars = sum(len(s["narration"]) for s in shots)
     print(f"[tts] Done {ok}/{len(targets)} | total text ~{total_chars} chars")
+
+    # Hard fail if nothing succeeded — keeps downstream stages from running blind
+    if ok == 0 and targets:
+        print("ERROR: no shots succeeded. Common causes: invalid MINIMAX_API_KEY, "
+              "depleted account balance, invalid voice_id, network blocked.")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

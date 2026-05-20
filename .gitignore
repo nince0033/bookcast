@@ -5,6 +5,7 @@ config.env
 .secrets/
 
 # --- Generated artifacts (large or per-project) ---
+projects/
 audio/
 images/
 slices/

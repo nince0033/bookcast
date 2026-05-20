@@ -3,7 +3,7 @@ title: 庄子：被时代判定没用的人，怎么活
 aspect_ratio: "16:9"
 voice_id: ttv-voice-2026042116132426-GLaeCaYk
 voice_speed: 1.0
-voice_emotion: calm
+voice_emotion: ""    # empty = MiniMax default pace (recommended); set to calm/happy/sad to change tone
 style_anchor: Gongbi heavy color painting, {scene}, Jiaying style, extremely fine ink linework, delicate transparent wash, soft beige aged paper texture background, muted ivory and ink black palette, minimalist composition, strictly no text, no Chinese characters, no calligraphy, no red seals or stamps, museum quality, 4K detail --ar 16:9
 bgm: sfx/bgm_guqin.mp3
 ---
